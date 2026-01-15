@@ -3,133 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Velox | Premium Lubricants Bhopal</title>
+    <title>Indian Velox Lubricants | Engine Perfection & Industrial Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        :root { --red: #ff0000; --gold: #ffcc00; --dark: #000; --gray: #111; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; scroll-behavior: smooth; }
-        body { background: var(--dark); color: #fff; line-height: 1.6; }
-
+        :root { --primary: #e31e24; --secondary: #0a2540; --accent: #fbc02d; --light-bg: #f4f7f9; --text: #333; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; scroll-behavior: smooth; }
+        body { line-height: 1.6; color: var(--text); overflow-x: hidden; background: #fff; }
+        
         /* Navigation */
-        nav { padding: 15px 8%; background: rgba(0,0,0,0.95); display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; border-bottom: 2px solid var(--red); }
-        .logo { font-size: 26px; font-weight: 900; letter-spacing: 1px; }
-        .logo span { color: var(--red); }
-        .nav-links a { color: #fff; text-decoration: none; margin-left: 20px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; transition: 0.3s; }
-        .nav-links a:hover { color: var(--gold); }
+        nav { padding: 15px 8%; background: #fff; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .logo { font-size: 26px; font-weight: 900; color: var(--secondary); text-decoration: none; letter-spacing: -1px; }
+        .logo span { color: var(--primary); }
+        .nav-links a { color: var(--secondary); text-decoration: none; margin-left: 25px; font-weight: 700; text-transform: uppercase; font-size: 14px; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
 
         /* Hero Section */
-        #home { height: 100vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('hero.jfif'); background-size: cover; background-position: center; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        .hero-title { font-size: 4.5rem; font-weight: 900; text-transform: uppercase; }
-        .hero-title span { color: var(--gold); }
-        .hero-sub { font-size: 1.2rem; letter-spacing: 5px; color: #ccc; margin-top: 10px; }
+        #hero { height: 75vh; background: linear-gradient(rgba(10,37,64,0.8), rgba(10,37,64,0.4)), url('hero.jfif'); background-size: cover; background-position: center; display: flex; align-items: center; color: #fff; padding: 0 8%; }
+        .hero-text h1 { font-size: 4rem; font-weight: 900; line-height: 1.1; margin-bottom: 20px; text-transform: uppercase; }
+        .hero-text span { color: var(--primary); }
 
-        /* Sections */
-        section { padding: 100px 8%; text-align: center; }
-        h2 { font-size: 3rem; margin-bottom: 40px; text-transform: uppercase; font-weight: 800; }
-        h2 span { color: var(--red); }
+        /* Features Bar */
+        .features-bar { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); padding: 60px 8%; gap: 30px; text-align: center; background: #fff; border-bottom: 1px solid #eee; }
+        .feature-item i { font-size: 2.5rem; color: var(--primary); margin-bottom: 15px; }
+        .feature-item h3 { color: var(--secondary); margin-bottom: 10px; text-transform: uppercase; font-size: 1.1rem; }
 
-        /* About Section */
-        .about-box { display: flex; flex-wrap: wrap; gap: 50px; align-items: center; justify-content: center; text-align: left; }
-        .about-text { max-width: 600px; }
-        .about-text h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 20px; }
-        .about-img { width: 350px; border-radius: 15px; border: 3px solid var(--red); box-shadow: 0 0 20px rgba(255,0,0,0.3); }
+        /* General Section Styling */
+        section { padding: 80px 8%; }
+        .title-area { text-align: center; margin-bottom: 60px; }
+        .title-area h2 { font-size: 2.5rem; text-transform: uppercase; color: var(--secondary); font-weight: 900; }
+        .divider { width: 80px; height: 5px; background: var(--primary); margin: 15px auto; }
 
-        /* Products Grid */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: var(--gray); padding: 30px; border-radius: 15px; border: 1px solid #333; transition: 0.4s; }
-        .card:hover { border-color: var(--red); transform: translateY(-10px); }
-        .card img { width: 100%; height: 320px; object-fit: contain; margin-bottom: 15px; }
-        .order-btn { display: inline-block; padding: 10px 20px; background: var(--red); color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 15px; }
+        /* Product Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+        .card { background: #fff; border: 1px solid #eee; transition: 0.4s; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; align-items: center; padding: 30px 20px; text-align: center; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .card img { width: auto; height: 280px; object-fit: contain; margin-bottom: 20px; }
+        .card-body h3 { font-size: 1.6rem; color: var(--secondary); margin-bottom: 15px; }
+        .card-body p { font-size: 15px; color: #666; margin-bottom: 20px; min-height: 45px; }
+        .view-btn { color: var(--primary); font-weight: bold; text-decoration: none; text-transform: uppercase; font-size: 14px; border-bottom: 2px solid transparent; transition: 0.3s; }
+        .view-btn:hover { border-bottom: 2px solid var(--primary); }
 
-        /* Contact & Map */
-        .contact-wrapper { display: flex; flex-wrap: wrap; gap: 40px; justify-content: center; margin-top: 40px; }
-        .contact-form { flex: 1; min-width: 300px; max-width: 500px; background: var(--gray); padding: 40px; border-radius: 15px; text-align: left; }
-        .map-box { flex: 1; min-width: 300px; height: 450px; border-radius: 15px; overflow: hidden; border: 2px solid var(--red); }
-        input, textarea { width: 100%; padding: 15px; margin-bottom: 20px; background: #000; border: 1px solid #444; color: #fff; border-radius: 5px; }
-        .btn-submit { background: var(--red); color: #fff; border: none; padding: 18px; font-weight: bold; cursor: pointer; width: 100%; border-radius: 5px; text-transform: uppercase; font-size: 1rem; }
+        /* Dealership Table */
+        .dealer-table { width: 100%; border-collapse: collapse; text-align: left; }
+        .dealer-table tr { border-bottom: 1px solid #eee; }
+        .dealer-table td { padding: 15px 0; }
 
-        /* Footer & Social */
-        footer { padding: 80px 8% 40px; background: #050505; text-align: center; border-top: 2px solid var(--red); }
-        .social-icons { margin: 30px 0; }
-        .social-icons a { color: #fff; font-size: 2.2rem; margin: 0 15px; transition: 0.3s; display: inline-block; }
-        .social-icons a:hover { color: var(--gold); transform: translateY(-5px); }
-        
-        /* Floating WhatsApp */
-        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; z-index: 10000; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        /* WhatsApp Button */
+        .wa-float { position: fixed; bottom: 30px; right: 30px; background: #25D366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; box-shadow: 0 10px 25px rgba(37,211,102,0.4); text-decoration: none; transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); }
+
+        /* Footer */
+        footer { background: #0a192f; color: #fff; padding: 60px 8% 20px; }
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; margin-top: 40px; text-align: center; font-size: 14px; color: #8892b0; }
+
+        @media (max-width: 768px) { 
+            .hero-text h1 { font-size: 2.5rem; } 
+            .nav-links { display: none; } 
+            .grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
+    <a href="https://wa.me/919179830597?text=Hi Indian Velox, I'm interested in your products/dealership." class="wa-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <nav>
-        <div class="logo">INDIAN <span>VELOX</span></div>
+        <a href="#" class="logo">INDIAN <span>VELOX</span></a>
         <div class="nav-links">
-            <a href="#home">Home</a>
-            <a href="#about">About</a>
+            <a href="#hero">Home</a>
             <a href="#products">Products</a>
-            <a href="#contact">Contact</a>
+            <a href="#dealership">Dealership</a>
+            <a href="#location">Contact</a>
+            <a href="tel:+919179830597" style="color: var(--primary);"><i class="fas fa-phone"></i> +91 9179830597</a>
         </div>
     </nav>
 
-    <a href="https://wa.me/919179830597?text=Hi%20Indian%20Velox%2C%0A%0AI%20saw%20your%20website%20indianvelox.com%20and%20I%20want%20to%20place%20an%20order%20for%20lubricants.%20Please%20share%20the%20price%20list%20and%20product%20details." class="wa-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
-
-    <section id="home">
-        <h1 class="hero-title">ENGINE <span>PERFECTION</span></h1>
-        <p class="hero-sub">PREMIUM LUBRICANTS FOR PEAK POWER</p>
-    </section>
-
-    <section id="about">
-        <h2>About <span>Indian Velox</span></h2>
-        <div class="about-box">
-            <img src="product1.jpeg" class="about-img">
-            <div class="about-text">
-                <h3>Leading Lubricant Distributor in Bhopal</h3>
-                <p>Welcome to Indian Velox, your trusted destination for high-performance engine lubricants. Strategically located at <b>Maple High Street, Bhopal</b>, we specialize in providing cutting-edge oil solutions that ensure your engine's longevity and maximum power.</p>
-                <p style="margin-top: 15px;">Whether it's for heavy-duty machinery or high-speed motorcycles, our products are engineered to reduce friction and master the machine.</p>
-                <p style="margin-top: 15px; color: var(--gold);"><b>Email:</b> infoindia0210@gmail.com | <b>Call:</b> +91 9179830597</p>
-            </div>
+    <section id="hero">
+        <div class="hero-text">
+            <h1>Superior <span>Lubrication</span> <br>Maximum Power</h1>
+            <p style="font-size: 1.2rem; margin-top: 10px; border-left: 4px solid var(--primary); padding-left: 15px;">Advanced engine oils designed for high-speed performance.</p>
         </div>
     </section>
 
-    <section id="products" style="background: var(--gray);">
-        <h2>Our <span>Premium Range</span></h2>
+    <div class="features-bar">
+        <div class="feature-item">
+            <i class="fas fa-shield-virus"></i>
+            <h3>Wear Protection</h3>
+            <p>Advanced anti-friction technology for longer engine life.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-temperature-low"></i>
+            <h3>Heat Resistance</h3>
+            <p>Maintains viscosity even in extreme temperatures.</p>
+        </div>
+        <div class="feature-item">
+            <i class="fas fa-oil-can"></i>
+            <h3>100% Virgin Oil</h3>
+            <p>Premium base oils for unmatched engine safety.</p>
+        </div>
+    </div>
+
+    <section id="products" style="background: var(--light-bg);">
+        <div class="title-area">
+            <h2>Our Product Range</h2>
+            <div class="divider"></div>
+            <p>Specialized solutions for Automotive and Industrial sectors.</p>
+        </div>
+
         <div class="grid">
-            <div class="card"><img src="p1.jpeg"><h3>VELOX 4T GOLD</h3><p>Ultimate protection for 2-wheelers.</p><a href="https://wa.me/919179830597?text=Hi%20Indian%20Velox%2C%20I%20want%20to%20order%20VELOX%204T%20GOLD.%20Please%20provide%20more%20details." class="order-btn">Order Now</a></div>
-            
-            <div class="card"><img src="p2.jpg"><h3>SYNTHETIC SERIES</h3><p>Peak performance for modern cars.</p><a href="https://wa.me/919179830597?text=Hi%20Indian%20Velox%2C%20I%20want%20to%20order%20SYNTHETIC%20SERIES%20OIL.%20Please%20provide%20more%20details." class="order-btn">Order Now</a></div>
-            
-            <div class="card"><img src="p3.jpg"><h3>HEAVY DUTY OIL</h3><p>Mastering the toughest machines.</p><a href="https://wa.me/919179830597?text=Hi%20Indian%20Velox%2C%20I%20want%20to%20order%20HEAVY%20DUTY%20OIL.%20Please%20provide%20more%20details." class="order-btn">Order Now</a></div>
+            <div class="card">
+                <img src="car-oil.png" alt="Automotive Specialists">
+                <div class="card-body">
+                    <h3>Automotive Specialists</h3>
+                    <p>Premium 3.5L Car Engine Oil. Engineered for high-speed performance and engine safety.</p>
+                    <a href="https://wa.me/919179830597?text=Interested in Automotive Specialists (Car Oil)" class="view-btn">Inquire via WhatsApp →</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="industrial-barrel.png" alt="Industrial Solutions">
+                <div class="card-body">
+                    <h3>Industrial Solutions</h3>
+                    <p>Heavy-duty hydraulic and gear oils in 210L barrels for massive industrial machinery.</p>
+                    <a href="https://wa.me/919179830597?text=Interested in Industrial Solutions (Barrels)" class="view-btn">Inquire via WhatsApp →</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="p1.jpeg" alt="Bike Engine Oils">
+                <div class="card-body">
+                    <h3>Bike Engine Oils</h3>
+                    <p>High-speed 4T oils designed for smooth gear shifts and superior engine cooling.</p>
+                    <a href="https://wa.me/919179830597?text=Interested in Bike Engine Oils (4T)" class="view-btn">Inquire via WhatsApp →</a>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="contact">
-        <h2>Find <span>Us Here</span></h2>
-        <div class="contact-wrapper">
-            <div class="contact-form">
-                <form action="https://formsubmit.co/infoindia0210@gmail.com" method="POST">
-                    <input type="text" name="name" placeholder="Full Name" required>
-                    <input type="email" name="email" placeholder="Email Address" required>
-                    <textarea name="message" rows="5" placeholder="How can we help you today?" required></textarea>
-                    <button type="submit" class="btn-submit">Send Inquiry</button>
-                </form>
+    <section id="dealership">
+        <div class="grid" style="grid-template-columns: 1fr 1fr; align-items: center;">
+            <div>
+                <h2 style="color: var(--secondary); font-size: 2.5rem; margin-bottom: 20px;">Business Partnership</h2>
+                <p style="margin-bottom: 30px;">Join the fastest-growing network of lubricants in Central India.</p>
+                <table class="dealer-table">
+                    <tr>
+                        <td><i class="fas fa-check-circle" style="color: #25D366;"></i> <strong>High Margins:</strong></td>
+                        <td style="color: #666;">Profitable returns for all our distributors.</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-check-circle" style="color: #25D366;"></i> <strong>Marketing:</strong></td>
+                        <td style="color: #666;">Complete support with boards and brochures.</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-check-circle" style="color: #25D366;"></i> <strong>Exclusive:</strong></td>
+                        <td style="color: #666;">Monopoly rights for your specific territory.</td>
+                    </tr>
+                </table>
             </div>
-            <div class="map-box">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.123456789!2d77.4123456!3d23.2512345!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDE1JzA0LjQiTiA3N8KwMjQnNDQuNCJF!5e0!3m2!1sen!2sin!4v1234567890123" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div style="background: var(--secondary); color: #fff; padding: 40px; border-radius: 15px; text-align: center;">
+                <i class="fas fa-handshake" style="font-size: 4rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <h3>Start Your Journey</h3>
+                <p style="margin: 20px 0;">Be a part of Indian Velox family today.</p>
+                <a href="https://wa.me/919179830597?text=I'm interested in Dealership." style="background: var(--primary); color: #fff; text-decoration: none; padding: 12px 30px; border-radius: 5px; font-weight: bold; display: inline-block;">BECOME A DEALER</a>
             </div>
         </div>
+    </section>
+
+    <section id="location" style="background: var(--light-bg);">
+        <div class="title-area">
+            <h2>Visit Our Office</h2>
+            <div class="divider"></div>
+        </div>
+        <div style="width: 100%; height: 400px; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3667.632289434862!2d77.44754437531988!3d23.1836544790616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x397c43e9131afdbe%3A0x33282b10ee89dc9c!2sMaple%20High%20Street!5e0!3m2!1sen!2sin!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p style="text-align: center; margin-top: 20px; font-weight: bold;">Maple High Street, Opp. Ashima Mall, Hoshangabad Road, Bhopal (MP)</p>
     </section>
 
     <footer>
-        <div class="logo">INDIAN <span>VELOX</span></div>
-        <p style="margin-top: 15px;">Maple High Street, Bhopal, M.P. | infoindia0210@gmail.com</p>
-        
-        <div class="social-icons">
-            <a href="https://www.facebook.com/share/1F58FaG6ms/" target="_blank"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/infoindia0210?igsh=bXV0Z3M4NXFhaW9m" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.youtube.com/@IndianVelox" target="_blank"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.linkedin.com/in/chinmay-sharma-1" target="_blank"><i class="fab fa-linkedin"></i></a>
+        <div style="text-align: center;">
+            <h2 style="color: var(--primary); margin-bottom: 10px;">INDIAN VELOX</h2>
+            <p>Engineered for Excellence. Designed for Protection.</p>
+            <p style="margin-top: 20px; color: #8892b0;">Email: infoindia0210@gmail.com | Phone: +91 9179830597</p>
         </div>
-
-        <p style="color: #666; font-size: 0.8rem;">© 2026 Indian Velox Lubricants. All Rights Reserved.</p>
+        <div class="footer-bottom">
+            <p>© 2026 Indian Velox Lubricants. All Rights Reserved.</p>
+        </div>
     </footer>
 
 </body>
