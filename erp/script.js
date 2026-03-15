@@ -1,48 +1,48 @@
-const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxQZZ__RSxgRBaFjLn8gBCRtY4cLxrQR25PJlAgGFAr9sqW0-fHPVVqBmwFMF6yWRiV/exec";
+const WEB_APP_URL = "AKfycbxo4D_xIvTblGC1pJ7YFdLWmhG6WTAwtHwV1VYFfKl3UVdT8SH9ZAa9kHUjLXMiGACh";
 
 function handleLogin() {
-    const user = document.getElementById('username').value;
-    const pass = document.getElementById('password').value;
-    // Admin password: velox@admin, Dealer password: dealer@123
-    if((user === "admin" && pass === "velox@admin") || (user === "dealer" && pass === "dealer@123")) {
+    const u = document.getElementById('username').value;
+    const p = document.getElementById('password').value;
+    if(u === "admin" && p === "velox@admin") {
         document.getElementById('login-container').style.display = 'none';
         document.getElementById('erp-dashboard').style.display = 'flex';
-        document.getElementById('display-user').innerText = "Logged in: " + user;
-    } else { alert("Invalid Credentials!"); }
+    } else { alert("Invalid Credentials"); }
 }
 
 function showModule(id) {
     document.querySelectorAll('.module').forEach(m => m.style.display = 'none');
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.getElementById(id + '-module').style.display = 'block';
-    event.currentTarget.classList.add('active');
 }
 
 function updateTotal() {
-    const rate = parseFloat(document.getElementById('prod_select').value) || 0;
-    const qty = parseFloat(document.getElementById('qty').value) || 0;
-    const subtotal = rate * qty;
-    const gst = subtotal * 0.18;
-    const grand = subtotal + gst;
-
-    document.getElementById('rate_val').innerText = rate;
-    document.getElementById('gst_val').innerText = gst.toFixed(2);
-    document.getElementById('total_val').innerText = grand.toFixed(2);
-    document.getElementById('sub_total').innerText = subtotal.toFixed(2);
-    document.getElementById('tax_total').innerText = gst.toFixed(2);
-    document.getElementById('grand_total').innerText = grand.toFixed(2);
+    const rate = document.getElementById('prod_select').value;
+    const qty = document.getElementById('qty').value || 0;
+    document.getElementById('grand_total').innerText = (rate * qty * 1.18).toFixed(2);
 }
 
-async function processInvoice() {
-    const data = {
-        user: "Admin",
-        item: document.getElementById('prod_select').options[document.getElementById('prod_select').selectedIndex].text,
-        qty: document.getElementById('qty').value,
-        amount: document.getElementById('grand_total').innerText,
-        action: "ADD_SALE_AND_REDUCE_STOCK"
-    };
+async function saveData(actionType) {
+    let payload = { action: actionType, user: "Admin" };
+
+    if(actionType === 'ADD_SALE') {
+        payload.item = document.getElementById('prod_select').options[document.getElementById('prod_select').selectedIndex].text;
+        payload.qty = document.getElementById('qty').value;
+        payload.amount = document.getElementById('grand_total').innerText;
+    } else if(actionType === 'ADD_STAFF') {
+        payload.name = document.getElementById('s_name').value;
+        payload.role = document.getElementById('s_role').value;
+        payload.salary = document.getElementById('s_sal').value;
+    } else if(actionType === 'ADD_DEALER') {
+        payload.dealerName = document.getElementById('d_name').value;
+        payload.location = document.getElementById('d_loc').value;
+        payload.phone = document.getElementById('d_phone').value;
+    } else if(actionType === 'ADD_PRODUCT') {
+        payload.itemName = document.getElementById('p_name').value;
+        payload.initialStock = document.getElementById('p_stock').value;
+    }
+
     try {
-        await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-        alert("✅ Bill Saved & Inventory Updated!");
-    } catch(e) { alert("Error Syncing!"); }
+        await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+        alert("✅ Data Synced Successfully!");
+        location.reload(); 
+    } catch(e) { alert("Error!"); }
 }
