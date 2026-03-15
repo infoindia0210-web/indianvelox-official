@@ -1,12 +1,28 @@
-:root { --primary: #2c3e50; --accent: #f39c12; --danger: #e74c3c; --success: #27ae60; }
-body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #ecf0f1; }
-#login-container { display: flex; justify-content: center; align-items: center; height: 100vh; background: linear-gradient(135deg, #2c3e50, #000); }
-.login-card { background: white; padding: 50px; border-radius: 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); width: 350px; text-align: center; }
-header { background: #1a252f; color: white; padding: 15px 40px; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--accent); }
-.sidebar { width: 240px; background: var(--primary); height: 100vh; float: left; }
-.sidebar button { width: 100%; padding: 20px; background: none; color: #bdc3c7; border: none; text-align: left; cursor: pointer; border-bottom: 1px solid #34495e; }
-.sidebar button:hover { background: #34495e; color: white; }
-.content-area { margin-left: 240px; padding: 30px; }
-.invoice-box { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-input, select { display: block; width: 100%; margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; }
-#tax-calc { font-weight: bold; margin: 15px 0; color: var(--primary); }
+* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+body { margin: 0; background: #f0f2f5; display: flex; }
+
+/* Login */
+#login-container { width: 100vw; height: 100vh; background: #2c3e50; display: flex; align-items: center; justify-content: center; }
+.login-card { background: white; padding: 40px; border-radius: 12px; width: 350px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }
+button { width: 100%; padding: 12px; background: #e67e22; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; }
+
+/* Dashboard Layout */
+#erp-dashboard { display: flex; width: 100vw; height: 100vh; }
+.sidebar { width: 260px; background: #1a252f; color: white; display: flex; flex-direction: column; padding: 20px; }
+.brand { font-size: 22px; font-weight: 700; color: #e67e22; margin-bottom: 40px; text-align: center; }
+.brand span { color: white; }
+.nav-btn { background: none; text-align: left; padding: 15px; color: #bdc3c7; border-bottom: 1px solid #2c3e50; transition: 0.3s; }
+.nav-btn:hover, .nav-btn.active { background: #2c3e50; color: white; }
+.main-content { flex: 1; padding: 30px; overflow-y: auto; }
+
+/* Components */
+.card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+.billing-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+.billing-table th { background: #f8f9fa; padding: 12px; text-align: left; border-bottom: 2px solid #eee; }
+.billing-table td { padding: 12px; border-bottom: 1px solid #eee; }
+.billing-footer { display: flex; flex-direction: column; align-items: flex-end; margin-top: 20px; }
+.summary-item { margin: 5px 0; font-size: 16px; }
+.grand-total { font-size: 22px; font-weight: 700; color: #27ae60; margin-top: 10px; }
+.print-btn { width: auto; background: #3498db; margin-bottom: 10px; }
+.save-btn { width: 200px; margin-top: 20px; background: #27ae60; }
