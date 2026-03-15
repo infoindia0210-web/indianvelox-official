@@ -1,0 +1,21 @@
+<div id="billing-module" class="module">
+    <h2>Professional GST Invoice</h2>
+    <div class="invoice-box">
+        <input type="text" id="cust_name" placeholder="Customer Name">
+        <select id="prod_select" onchange="updateTotal()">
+            <option value="0" disabled selected>Select Product</option>
+            <option value="2500">Indian Velox 20W40 (Case) - ₹2500</option>
+            <option value="4200">Indian Velox 5W30 (Case) - ₹4200</option>
+        </select>
+        <input type="number" id="qty" placeholder="Quantity" oninput="updateTotal()">
+        
+        <div class="calculation-summary">
+            <p>Subtotal: ₹<span id="subtotal">0</span></p>
+            <p>GST (18%): ₹<span id="gst_amt">0</span></p>
+            <h3 style="color: #27ae60;">Grand Total: ₹<span id="grand_total">0</span></h3>
+        </div>
+        
+        <button onclick="processInvoice()" style="background: #27ae60;">Generate & Sync Bill</button>
+        <button onclick="window.print()" style="background: #3498db; margin-top: 10px;">Download PDF / Print</button>
+    </div>
+</div>
