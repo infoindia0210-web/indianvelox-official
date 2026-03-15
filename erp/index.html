@@ -2,112 +2,74 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Velox - Professional ERP Suite</title>
+    <title>Indian Velox - Integrated ERP</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <div id="login-container">
         <div class="login-card">
-            <h1 style="color: #e67e22; margin-bottom: 5px;">INDIAN VELOX</h1>
-            <p style="color: #666; font-size: 14px; margin-bottom: 20px;">Accounting & Inventory Suite</p>
-            <input type="text" id="username" placeholder="User ID / Dealer ID">
+            <h2>INDIAN VELOX ERP</h2>
+            <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
-            <button onclick="handleLogin()" style="background: #2c3e50;">Login to System</button>
+            <button onclick="handleLogin()">Login</button>
         </div>
     </div>
 
     <div id="erp-dashboard" style="display: none;">
-        <aside class="sidebar">
-            <div class="brand">VELOX <span>PRO</span></div>
-            <nav>
-                <button onclick="showModule('billing')" class="nav-btn active">🧾 Billing & GST</button>
-                <button onclick="showModule('inventory')" class="nav-btn">📦 Inventory</button>
-                <button onclick="showModule('hrms')" class="nav-btn">👥 HRMS/Staff</button>
-                <button onclick="showModule('dealer')" class="nav-btn">🤝 Dealer Portal</button>
-            </nav>
-            <div class="user-profile">
-                <p id="display-user">Admin</p>
-                <button onclick="location.reload()" class="logout-link">Logout</button>
-            </div>
-        </aside>
+        <div class="sidebar">
+            <h2 class="brand">VELOX <span>ERP</span></h2>
+            <button onclick="showModule('billing')">🧾 Billing & GST</button>
+            <button onclick="showModule('inventory')">📦 Inventory & Products</button>
+            <button onclick="showModule('hrms')">👥 Staff (HRMS)</button>
+            <button onclick="showModule('dealers')">🤝 Dealer Management</button>
+            <button onclick="location.reload()" class="logout-btn">Logout</button>
+        </div>
 
-        <main class="main-content">
+        <div class="content">
             <div id="billing-module" class="module">
-                <div class="module-header">
-                    <h2>Tax Invoice</h2>
-                    <button onclick="window.print()" class="print-btn">Print PDF</button>
-                </div>
+                <h3>New GST Invoice</h3>
                 <div class="card">
-                    <div class="form-grid">
-                        <input type="text" id="cust_name" placeholder="Party Name">
-                        <input type="text" id="cust_gst" placeholder="Party GSTIN">
-                    </div>
-                    <table class="billing-table">
-                        <thead>
-                            <tr>
-                                <th>Item Description</th>
-                                <th>Qty</th>
-                                <th>Rate</th>
-                                <th>GST (18%)</th>
-                                <th>Amount</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <select id="prod_select" onchange="updateTotal()">
-                                        <option value="0">Select Product</option>
-                                        <option value="2500">20W40 Eco Oil (Case)</option>
-                                        <option value="4200">5W30 Synthetic (Case)</option>
-                                    </select>
-                                </td>
-                                <td><input type="number" id="qty" value="1" oninput="updateTotal()"></td>
-                                <td>₹<span id="rate_val">0</span></td>
-                                <td>₹<span id="gst_val">0</span></td>
-                                <td><strong>₹<span id="total_val">0</span></strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="billing-footer">
-                        <div class="summary-item">Subtotal: <span>₹<span id="sub_total">0</span></span></div>
-                        <div class="summary-item">Total GST: <span>₹<span id="tax_total">0</span></span></div>
-                        <div class="summary-item grand-total">Grand Total: <span>₹<span id="grand_total">0</span></span></div>
-                        <button onclick="processInvoice()" class="save-btn">Save & Sync Bill</button>
-                    </div>
+                    <input type="text" id="cust_name" placeholder="Dealer/Customer Name">
+                    <select id="prod_select" onchange="updateTotal()">
+                        <option value="2500">Velox 20W40 Eco (₹2500)</option>
+                        <option value="4200">Velox 5W30 Synth (₹4200)</option>
+                    </select>
+                    <input type="number" id="qty" placeholder="Qty" oninput="updateTotal()">
+                    <div class="result">Total: ₹<span id="grand_total">0</span></div>
+                    <button onclick="saveData('ADD_SALE')">Generate & Sync Bill</button>
                 </div>
             </div>
 
             <div id="inventory-module" class="module" style="display:none;">
-                <h2>Inventory Management</h2>
+                <h3>Add New Product</h3>
                 <div class="card">
-                    <table class="billing-table">
-                        <tr><th>Product</th><th>In-Stock</th><th>Last Updated</th></tr>
-                        <tr><td>20W40 Eco Oil</td><td>500 Cases</td><td>15-Mar-2026</td></tr>
-                        <tr><td>5W30 Synthetic</td><td>240 Cases</td><td>15-Mar-2026</td></tr>
-                    </table>
+                    <input type="text" id="p_name" placeholder="Product Name">
+                    <input type="number" id="p_stock" placeholder="Initial Stock">
+                    <button onclick="saveData('ADD_PRODUCT')">Add to Warehouse</button>
                 </div>
             </div>
 
             <div id="hrms-module" class="module" style="display:none;">
-                <h2>Staff & HRMS</h2>
+                <h3>Add Staff Member</h3>
                 <div class="card">
-                    <p>Attendance, Salary, and Staff Records</p>
-                    <button class="nav-btn" style="width: auto;">+ Add Staff</button>
+                    <input type="text" id="s_name" placeholder="Staff Name">
+                    <input type="text" id="s_role" placeholder="Role (Driver/Sales)">
+                    <input type="number" id="s_sal" placeholder="Monthly Salary">
+                    <button onclick="saveData('ADD_STAFF')">Save Staff</button>
                 </div>
             </div>
 
-            <div id="dealer-module" class="module" style="display:none;">
-                <h2>Dealer Portal</h2>
+            <div id="dealers-module" class="module" style="display:none;">
+                <h3>Register New Dealer</h3>
                 <div class="card">
-                    <p>Order History & Dealer Performance</p>
+                    <input type="text" id="d_name" placeholder="Dealer Shop Name">
+                    <input type="text" id="d_loc" placeholder="City/Location">
+                    <input type="text" id="d_phone" placeholder="Contact Number">
+                    <button onclick="saveData('ADD_DEALER')">Register Dealer</button>
                 </div>
             </div>
-        </main>
+        </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
