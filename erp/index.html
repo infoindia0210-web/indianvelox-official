@@ -1,155 +1,133 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indian Velox - Master ERP</title>
+    <title>Indian Velox - All-in-One ERP</title>
     <style>
-        :root { --primary: #1a252f; --accent: #e67e22; --success: #27ae60; --bg: #f4f7f6; }
-        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin: 0; }
-        body { background: var(--bg); display: flex; height: 100vh; overflow: hidden; }
-        
-        /* Login Overlay */
-        #login-overlay { position: fixed; inset: 0; background: var(--primary); z-index: 1000; display: flex; align-items: center; justify-content: center; }
-        .login-box { background: white; padding: 40px; border-radius: 12px; width: 350px; text-align: center; }
-        input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 6px; }
-        
-        /* Sidebar */
-        .sidebar { width: 260px; background: var(--primary); color: white; padding: 20px; display: flex; flex-direction: column; }
-        .nav-btn { background: none; border: none; color: #bdc3c7; padding: 15px; text-align: left; cursor: pointer; border-radius: 6px; margin-bottom: 5px; font-weight: 600; }
-        .nav-btn:hover, .nav-btn.active { background: #2c3e50; color: white; }
-        
-        /* Content Area */
-        .main { flex: 1; padding: 30px; overflow-y: auto; }
-        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        :root { --p: #1a252f; --a: #e67e22; --s: #27ae60; --d: #c0392b; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; display: flex; height: 100vh; }
+        .sidebar { width: 260px; background: var(--p); color: white; padding: 20px; display: none; flex-direction: column; }
+        .nav-btn { background: none; border: none; color: #bdc3c7; padding: 14px; text-align: left; cursor: pointer; border-radius: 5px; width: 100%; margin: 2px 0; }
+        .nav-btn.active { background: #2c3e50; color: white; border-left: 4px solid var(--a); }
+        .main { flex: 1; padding: 30px; overflow-y: auto; display: none; }
+        .card { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 20px; }
         .module { display: none; }
-        .active-module { display: block; }
-        
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { padding: 12px; border-bottom: 1px solid #eee; text-align: left; }
-        .grand-total { font-size: 24px; color: var(--success); font-weight: bold; margin-top: 20px; }
-        button { cursor: pointer; border: none; border-radius: 4px; padding: 10px 20px; background: var(--accent); color: white; font-weight: bold; }
+        .active-mod { display: block; }
+        input, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 5px; }
+        button { padding: 12px 20px; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; background: var(--a); color: white; }
     </style>
 </head>
 <body>
 
-<div id="login-overlay">
-    <div class="login-box">
-        <h2 style="color: var(--accent)">INDIAN VELOX</h2>
-        <p>Master ERP Suite</p>
-        <input type="text" id="user" placeholder="Username">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="handleLogin()" style="width: 100%">Login to System</button>
+<div id="lp" style="position:fixed; inset:0; background:var(--p); display:flex; align-items:center; justify-content:center; z-index:9999;">
+    <div style="background:white; padding:40px; border-radius:10px; width:350px; text-align:center;">
+        <h2 style="color:var(--a)">INDIAN VELOX</h2>
+        <input type="text" id="u" placeholder="User ID">
+        <input type="password" id="p" placeholder="Password">
+        <button onclick="login()" style="width:100%">Login to ERP</button>
     </div>
 </div>
 
-<aside class="sidebar" id="sidebar" style="display: none;">
-    <h2 style="color: var(--accent); margin-bottom: 30px;">VELOX <span style="color:white">PRO</span></h2>
-    <button class="nav-btn active" id="btn-billing" onclick="showMod('billing')">🧾 Billing & GST</button>
-    <button class="nav-btn" id="btn-inventory" onclick="showMod('inventory')">📦 Inventory</button>
-    <button class="nav-btn" id="btn-hrms" onclick="showMod('hrms')">👥 HRMS/Staff</button>
-    <button class="nav-btn" id="btn-dealer" onclick="showMod('dealer')">🤝 Dealer Portal</button>
-    <button onclick="location.reload()" style="background:#c0392b; margin-top: auto;">Logout</button>
-</aside>
+<nav class="sidebar" id="sb">
+    <h2 style="color:var(--a); margin-bottom:20px;">VELOX PRO</h2>
+    <button class="nav-btn active" id="b-bill" onclick="v('bill')">🧾 Billing & GST</button>
+    <button class="nav-btn" id="b-ledger" onclick="v('ledger')">💰 Payment Ledger</button>
+    <button class="nav-btn" id="b-staff" onclick="v('staff')">📅 Attendance</button>
+    <button class="nav-btn" id="b-inv" onclick="v('inv')">📦 Inventory</button>
+    <button onclick="location.reload()" style="background:var(--d); margin-top:auto;">Logout</button>
+</nav>
 
-<main class="main" id="main-content" style="display: none;">
-    <div id="billing" class="module active-module">
-        <h2>Professional GST Invoice</h2>
-        <div class="card" style="margin-top:20px;">
-            <input type="text" id="cust" placeholder="Customer Name" style="width: 48%">
-            <select id="prod" onchange="calc()" style="width: 48%; padding: 12px; border-radius: 6px;">
-                <option value="">-- Select Product --</option>
-                <option value="404" data-name="ECO SERIES 20W40 UNS">ECO SERIES 20W40 UNS (900ML)</option>
-                <option value="431" data-name="TURBO POWER 20W40 SN">TURBO POWER 20W40 SN (900ML)</option>
-                <option value="392" data-name="DEMON PRO 10W30 SN">DEMON PRO 10W30 SN (800ML)</option>
-                <option value="472" data-name="TURBO POWER 20W40 SN 1L">TURBO POWER 20W40 SN (1 LTR)</option>
-                <option value="1659" data-name="ULTRA DRIVE PRO 5W30 SP">ULTRA DRIVE PRO 5W30 SP (3.5 LTR)</option>
-                <option value="2179" data-name="MAX TORQUE SS 5W30 SP">MAX TORQUE SS 5W30 SP (3.5 LTR)</option>
+<main class="main" id="mn">
+    <div id="bill" class="module active-mod">
+        <h2>Professional Billing</h2>
+        <div class="card">
+            <input type="text" id="cn" placeholder="Dealer Name">
+            <select id="pr" onchange="up()">
+                <option value="0">-- Select Oil --</option>
+                <option value="404">ECO SERIES 20W40 UNS (900ML)</option>
+                <option value="431">TURBO POWER 20W40 SN (900ML)</option>
+                <option value="392">DEMON PRO 10W30 SN (800ML)</option>
+                <option value="472">TURBO POWER 20W40 SN (1 LTR)</option>
+                <option value="1659">ULTRA DRIVE PRO 5W30 SP (3.5L)</option>
+                <option value="2179">MAX TORQUE SS 5W30 SP (3.5L)</option>
             </select>
-            <input type="number" id="qty" placeholder="Qty" oninput="calc()" style="width: 20%">
-            
-            <div class="grand-total">Grand Total: ₹<span id="total">0</span></div>
-            <p style="font-size: 14px; color: #666;">HSN: 27101980 | GST: 18% Included</p>
-            <button onclick="syncData('SYNC_BILL')" style="margin-top: 20px; background: var(--success)">Generate & Sync Bill</button>
+            <input type="number" id="q" placeholder="Qty" oninput="up()">
+            <h3 style="color:var(--s)">Total: ₹<span id="t">0</span></h3>
+            <button onclick="sync('SYNC_BILL')">Save & Sync Bill</button>
         </div>
     </div>
 
-    <div id="inventory" class="module">
-        <h2>Warehouse Management</h2>
-        <div class="card" style="margin-top:20px;">
-            <table id="inv-table">
-                <tr><th>Item</th><th>HSN</th><th>MRP</th><th>Stock</th></tr>
-                <tr><td>ECO SERIES 20W40 UNS</td><td>27101980</td><td>₹404</td><td>500 Units</td></tr>
-            </table>
+    <div id="ledger" class="module">
+        <h2>Dealer Payment Entry</h2>
+        <div class="card">
+            <input type="text" id="l-dealer" placeholder="Dealer Name">
+            <input type="number" id="l-amt" placeholder="Amount Received (₹)">
+            <button onclick="sync('UPDATE_LEDGER')" style="background:var(--s)">Record Payment</button>
         </div>
     </div>
-    
-    <div id="hrms" class="module">
-        <h2>Staff & Payroll</h2>
-        <div class="card" style="margin-top:20px;"><p>Admin control for staff attendance and salary.</p></div>
-    </div>
 
-    <div id="dealer" class="module">
-        <h2>Dealer Self-Service</h2>
-        <div class="card" style="margin-top:20px;"><p>Welcome, Bhopal Dealer. Track your orders here.</p></div>
+    <div id="staff" class="module">
+        <h2>Staff Attendance</h2>
+        <div class="card">
+            <select id="s-name">
+                <option>Employee 1</option>
+                <option>Employee 2</option>
+                <option>Sales Executive</option>
+            </select>
+            <select id="s-status">
+                <option value="Present">Present (P)</option>
+                <option value="Absent">Absent (A)</option>
+                <option value="Half Day">Half Day</option>
+            </select>
+            <button onclick="sync('LOG_ATTENDANCE')">Submit Attendance</button>
+        </div>
     </div>
 </main>
 
 <script>
-    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxQZZ__RSxgRBaFjLn8gBCRtY4cLxrQR25PJlAgGFAr9sqW0-fHPVVqBmwFMF6yWRiV/exec";
-    
-    const ROLES = {
-        "admin": { pw: "velox@admin", access: "all" },
-        "accounts": { pw: "velox@acc", access: ["billing", "inventory"] },
-        "hr": { pw: "velox@hr", access: ["hrms"] },
-        "dealer_01": { pw: "velox123", access: ["dealer"] }
-    };
+    const D_ID = "AKfycbzo03PEfPiLMfgguZh0akB0MtBX5rfTueNn58XDAnMLOKWspMfjM63s_UTxpfCZ8gxW";
+    const URL = "https://script.google.com/macros/s/" + D_ID + "/exec";
 
-    function handleLogin() {
-        const u = document.getElementById('user').value.toLowerCase();
-        const p = document.getElementById('pass').value;
-
-        if (ROLES[u] && ROLES[u].pw === p) {
-            document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('sidebar').style.display = 'flex';
-            document.getElementById('main-content').style.display = 'block';
-            
-            // Hide buttons based on role
-            const access = ROLES[u].access;
-            ["billing", "inventory", "hrms", "dealer"].forEach(m => {
-                document.getElementById('btn-'+m).style.display = (access === 'all' || access.includes(m)) ? 'block' : 'none';
-            });
-            showMod(access === 'all' ? 'billing' : access[0]);
-        } else { alert("Galti! Sahi Password daalein."); }
+    function login() {
+        const u = document.getElementById('u').value.toLowerCase();
+        const p = document.getElementById('p').value;
+        if((u==='admin' && p==='velox@admin') || (u==='dealer_01' && p==='velox123')) {
+            document.getElementById('lp').style.display='none';
+            document.getElementById('sb').style.display='flex';
+            document.getElementById('mn').style.display='block';
+        } else { alert("Invalid!"); }
     }
 
-    function showMod(id) {
-        document.querySelectorAll('.module').forEach(m => m.classList.remove('active-module'));
+    function v(id) {
+        document.querySelectorAll('.module').forEach(m => m.classList.remove('active-mod'));
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-        document.getElementById(id).classList.add('active-module');
-        document.getElementById('btn-'+id).classList.add('active');
+        document.getElementById(id).classList.add('active-mod');
+        document.getElementById('b-'+id).classList.add('active');
     }
 
-    function calc() {
-        const mrp = parseFloat(document.getElementById('prod').value) || 0;
-        const q = parseFloat(document.getElementById('qty').value) || 0;
-        document.getElementById('total').innerText = (mrp * q).toFixed(2);
+    function up() {
+        const r = document.getElementById('pr').value;
+        const q = document.getElementById('q').value || 0;
+        document.getElementById('t').innerText = (r * q).toFixed(2);
     }
 
-    async function syncData(action) {
-        const sel = document.getElementById('prod');
-        const data = {
-            action: action,
-            user: document.getElementById('user').value,
-            customer: document.getElementById('cust').value,
-            item: sel.options[sel.selectedIndex].getAttribute('data-name'),
-            qty: document.getElementById('qty').value,
-            total: document.getElementById('total').innerText
-        };
-        try {
-            await fetch(WEB_APP_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(data) });
-            alert("✅ Cloud Sync Success!");
-        } catch(e) { alert("Error connecting to sheet!"); }
+    async function sync(act) {
+        let d = { action: act, user: document.getElementById('u').value };
+        if(act==='SYNC_BILL') {
+            d.customer = document.getElementById('cn').value;
+            d.item = document.getElementById('pr').options[document.getElementById('pr').selectedIndex].text;
+            d.qty = document.getElementById('q').value;
+            d.total = document.getElementById('t').innerText;
+        } else if(act==='LOG_ATTENDANCE') {
+            d.staffName = document.getElementById('s-name').value;
+            d.status = document.getElementById('s-status').value;
+        } else if(act==='UPDATE_LEDGER') {
+            d.dealer = document.getElementById('l-dealer').value;
+            d.amount = document.getElementById('l-amt').value;
+        }
+        
+        await fetch(URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(d) });
+        alert("✅ Synced Successfully!");
     }
 </script>
 </body>
